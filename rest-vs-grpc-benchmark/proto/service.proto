@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "grpc/pb";
+
+message NestedData {
+  int32 id = 1;
+  string name = 2;
+  bool active = 3;
+  repeated string tags = 4;
+}
+
+message RequestPayload {
+  int32 user_id = 1;
+  string username = 2;
+  repeated NestedData data = 3;
+}
+
+message ResponsePayload {
+  string status = 1;
+  string message = 2;
+}
+
+service BenchmarkService {
+  rpc Process(RequestPayload) returns (ResponsePayload);
+}
